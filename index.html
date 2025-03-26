@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <!-- Redirect after 0.5 seconds -->
-    <meta http-equiv="refresh" content="0.5; url=https://puwu.vercel.app">
+    <title>Full Screen Embed</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-    <p>If you are not redirected automatically, follow this <a href="https://puwu.vercel.app">link</a>.</p>
+    <iframe src="https://puwu.vercel.app" title="Embedded Site"></iframe>
 </body>
 </html>
