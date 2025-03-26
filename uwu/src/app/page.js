@@ -25,7 +25,7 @@ const THEMES = {
   },
 };
 
-export const PROJECTS = [
+const PROJECTS = [
   {
     name: "Horizon Movies",
     description: "A fun place to watch movies without any ads",
@@ -296,7 +296,7 @@ const ContactSection = ({ theme }) => (
         ))}
       </div>
       <p className="text-xl text-opacity-80 leading-relaxed">
-        Feel free to reach out for collaborations, opportunities, or just to say hi! I'm always open to connecting with fellow tech enthusiasts and innovators.
+        Feel free to reach out for collaborations, opportunities, or just to say hi! I&apos;m always open to connecting with fellow tech enthusiasts and innovators.
       </p>
     </motion.div>
   </section>
