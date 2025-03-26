@@ -38,12 +38,12 @@ const PROJECTS = [
     image: "https://i.postimg.cc/cJH8GJH5/Weather.png",
     link: "https://pweather.vercel.app",
   },
-  {
-    name: "Pookiefy",
-    description: "Listen to your favourite songs without any ads on your personal music heaven",
-    image: "https://i.postimg.cc/C5GvB590/Capture.jpg",
-    link: "https://pookiefy.onrender.com/",
-  },
+  // {
+  //   name: "Pookiefy",
+  //   description: "Listen to your favourite songs without any ads on your personal music heaven",
+  //   image: "https://i.postimg.cc/C5GvB590/Capture.jpg",
+  //   link: "https://pookiefy.onrender.com/",
+  // },
   {
     name: "Rock Papers Scissors",
     description: "Test your skills and luck with a computer in the game of rock papers scissors",
