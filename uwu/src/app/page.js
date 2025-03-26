@@ -13,7 +13,7 @@ const THEMES = {
     accent2: 'text-[#FF5A5F] hover:text-[#FF7A7F]',
     card: 'bg-[#161B22] border border-[#30363D] text-white hover:bg-[#21262D] hover:border-[#6E7681]',
     gradient: 'bg-gradient-to-r from-[#58A6FF] via-[#8B949E] to-[#58A6FF]',
-    heroBackground: 'https://i.postimg.cc/dV5SzMwC/cloudy-sky-dark-themed.jpg',
+    heroBackground: 'https://i.postimg.cc/pTLXY5Rj/image.jpg',
   },
   light: {
     background: 'bg-white text-gray-900',
@@ -225,7 +225,7 @@ const AboutSection = ({ theme, age }) => (
       <p className="text-xl md:text-2xl text-opacity-80 leading-relaxed mb-6">
         Just an average random guy who loves coding shit.
         Other things i love include physics and maths.
-        My hobies are umm basketball and chess mostly?
+        My hobbies are umm basketball and chess mostly?
       </p>
       <p className="text-xl md:text-2xl text-opacity-80">
         I am <span className="font-bold">{age}</span> years old.
