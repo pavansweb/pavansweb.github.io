@@ -71,7 +71,7 @@ const Header = ({ theme, currentTheme, toggleTheme, isMobileMenuOpen, setIsMobil
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className={`text-2xl md:text-3xl font-bold tracking-tight ${theme.gradient}`}
+        className={`text-2xl md:text-3xl font-bold tracking-tight `}
       >
        Who am I?
       </motion.div>
@@ -164,16 +164,16 @@ const HeroSection = ({ theme }) => {
       }}
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-transparent via-[theme.bg] to-black opacity-80" />
+      {/* <div className="absolute inset-0 -z-10 bg-gradient-to-br from-transparent via-[theme.bg] to-black opacity-80" />
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-[theme.accent] opacity-20 blur-3xl rounded-full animate-pulse" />
-      <div className="absolute top-40 -right-20 w-72 h-72 bg-[theme.accent] opacity-20 blur-2xl rounded-full animate-pulse" />
+      <div className="absolute top-40 -right-20 w-72 h-72 bg-[theme.accent] opacity-20 blur-2xl rounded-full animate-pulse" /> */}
 
       <div className="relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className={`text-5xl md:text-7xl font-bold mb-6 ${theme.gradient}`}
+          className={`text-5xl md:text-7xl font-bold mb-6`}
         >
           Pavan Hegde
         </motion.h1>
@@ -221,7 +221,7 @@ const AboutSection = ({ theme, age }) => (
       transition={{ duration: 0.5 }}
       className="max-w-3xl mx-auto text-center"
     >
-      <h2 className={`text-4xl md:text-5xl font-bold mb-8 bg-clip-text bg-gradient-to-r ${theme.gradient}`}>About Me</h2>
+      <h2 className={`text-4xl md:text-5xl font-bold mb-8 bg-clip-text bg-gradient-to-r `}>About Me</h2>
       <p className="text-xl md:text-2xl text-opacity-80 leading-relaxed mb-6">
         Just an average random guy who loves coding shit.
         Other things i love include physics and maths.
