@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="https://i.postimg.cc/Fz2hR18L/pavan-logo.png" />
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.6/css/perfect-scrollbar.min.css"/>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 text-gray-900 font-sans`}
@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
       >
         {/* Main Content */}
         <main>{children}</main>
+        <script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.6/dist/perfect-scrollbar.min.js"></script>
       </body>
     </html>
   );
