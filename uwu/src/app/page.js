@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, px } from "framer-motion";
 import Link from "next/link";
 import { Github, Instagram, Mail, Moon, Sun, Menu, X, ArrowUpRight } from "lucide-react";
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
 const THEMES = {
   dark: {
@@ -66,71 +67,84 @@ const PROJECTS = [
 
 const Header = ({ theme, currentTheme, toggleTheme, isMobileMenuOpen, setIsMobileMenuOpen }) => (
   <header className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-md shadow-sm">
-    <nav className="container mx-auto flex justify-between items-center p-4 lg:px-16">
-      <motion.div 
+  <nav className="container mx-auto flex justify-between items-center p-4 lg:px-16">
+    <div className="flex items-center space-x-4">
+      <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className={`text-2xl md:text-3xl font-bold tracking-tight `}
+        className="text-2xl md:text-3xl font-bold tracking-tight"
       >
-       Who am I?
+        Who am I?
       </motion.div>
+      <Image
+        src="https://i.postimg.cc/Fz2hR18L/pavan-logo.png"
+        width={70} 
+        height={70} 
+        alt="Logo"
+      />
+    </div>
 
-      <div className="flex items-center space-x-4 md:space-x-6">
-        <button 
-          onClick={toggleTheme}
-          aria-label="Toggle Theme"
-          className={`hover:${theme.accent} transition-all duration-300 p-2 rounded-full`}
-        >
-          {currentTheme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
-        </button>
-      
-        <div className="hidden md:flex items-center space-x-6">
-          {['About', 'Projects', 'Contact'].map((section) => (
-            <a 
-              key={section} 
-              href={`#${section.toLowerCase()}`} 
-              className={`text-sm md:text-base ${theme.accent === 'text-blue-400 hover:text-blue-300' ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-black'} transition-colors group`}
-            >
-              {section}
-              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-blue-500"></span>
-            </a>
-          ))}
-        </div>
+    <div className="flex items-center space-x-4 md:space-x-6">
+      <button
+        onClick={toggleTheme}
+        aria-label="Toggle Theme"
+        className={`hover:${theme.accent} transition-all duration-300 p-2 rounded-full`}
+      >
+        {currentTheme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+      </button>
 
-        <div className="md:hidden">
-          <button 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`${theme.accent}`}
-            aria-label="Toggle Mobile Menu"
+      <div className="hidden md:flex items-center space-x-6">
+        {['About', 'Projects', 'Contact'].map((section) => (
+          <a
+            key={section}
+            href={`#${section.toLowerCase()}`}
+            className={`text-sm md:text-base ${
+              theme.accent === 'text-blue-400 hover:text-blue-300'
+                ? 'text-gray-300 hover:text-white'
+                : 'text-gray-700 hover:text-black'
+            } transition-colors group`}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+            {section}
+            <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-blue-500"></span>
+          </a>
+        ))}
       </div>
-    </nav>
 
-    {isMobileMenuOpen && (
-      <motion.div 
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        className={`md:hidden absolute top-full left-0 w-full ${theme.background} bg-opacity-90 backdrop-blur-md`}
-      >
-        <div className="flex flex-col items-center space-y-6 p-8">
-          {['About', 'Projects', 'Contact'].map((section) => (
-            <a 
-              key={section} 
-              href={`#${section.toLowerCase()}`} 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`text-xl hover:${theme.accent} transition`}
-            >
-              {section}
-            </a>
-          ))}
-        </div>
-      </motion.div>
-    )}
-  </header>
+      <div className="md:hidden">
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className={`${theme.accent}`}
+          aria-label="Toggle Mobile Menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  {isMobileMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={`md:hidden absolute top-full left-0 w-full ${theme.background} bg-opacity-90 backdrop-blur-md`}
+    >
+      <div className="flex flex-col items-center space-y-6 p-8">
+        {['About', 'Projects', 'Contact'].map((section) => (
+          <a
+            key={section}
+            href={`#${section.toLowerCase()}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-xl hover:${theme.accent} transition"
+          >
+            {section}
+          </a>
+        ))}
+      </div>
+    </motion.div>
+  )}
+</header>
+
 );
 
 const HeroSection = ({ theme }) => {
