@@ -182,7 +182,13 @@ const HeroSection = ({ theme }) => {
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-[theme.accent] opacity-20 blur-3xl rounded-full animate-pulse" />
       <div className="absolute top-40 -right-20 w-72 h-72 bg-[theme.accent] opacity-20 blur-2xl rounded-full animate-pulse" /> */}
 
+
       <div className="relative z-10">
+        <img 
+          src="https://i.postimg.cc/D0K0CpWx/491462236-1852394535612657-4493985187951270116-n.jpg" 
+          alt="Pavan Hegde" 
+          class="rounded-full w-32 h-32 mx-auto mb-4 border-4 border-white shadow-lg object-cover"
+        />
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -238,7 +244,7 @@ const AboutSection = ({ theme, age }) => (
       <h2 className={`text-4xl md:text-5xl font-bold mb-8 bg-clip-text bg-gradient-to-r `}>About Me</h2>
       <p className="text-xl md:text-2xl text-opacity-80 leading-relaxed mb-6">
         Just an average random guy who loves coding shit.
-        Other things i love include physics and maths.
+        Other things i love include physics and
         My hobbies are umm basketball and chess mostly?
       </p>
       <p className="text-xl md:text-2xl text-opacity-80">
