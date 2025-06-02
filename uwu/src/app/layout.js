@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
       >
         {/* Main Content */}
         <main>{children}</main>
-        <script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.6/dist/perfect-scrollbar.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.6/dist/perfect-scrollbar.min.js" async ></script>
       </body>
     </html>
   );
