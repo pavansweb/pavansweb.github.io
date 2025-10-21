@@ -13,78 +13,47 @@
 
         :root {
             --bg-dark: #0a0e27;
-            --bg-dark-secondary: #161b33;
-            --accent-primary: #00d4ff;
-            --accent-secondary: #ff3366;
-            --accent-tertiary: #7c3aed;
-            --text-light: #ffffff;
-            --text-muted: #a0aec0;
-            --card-bg: rgba(22, 27, 51, 0.8);
-            --border-color: rgba(0, 212, 255, 0.2);
+            --bg-secondary: #161b33;
+            --accent-cyan: #00d4ff;
+            --accent-pink: #ff3366;
+            --accent-purple: #7c3aed;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --card-bg: rgba(22, 27, 51, 0.6);
+            --border-glow: rgba(0, 212, 255, 0.3);
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg-dark);
-            color: var(--text-light);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
-            transition: background 0.3s ease;
         }
 
-        body.light-mode {
-            --bg-dark: #f8fafc;
-            --bg-dark-secondary: #ffffff;
-            --accent-primary: #0066cc;
-            --accent-secondary: #ff3366;
-            --accent-tertiary: #7c3aed;
-            --text-light: #1a202c;
-            --text-muted: #4a5568;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --border-color: rgba(0, 102, 204, 0.2);
+        body.light {
+            --bg-dark: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border-glow: rgba(0, 102, 204, 0.2);
         }
 
-        /* Animated Background */
-        .bg-animation {
+        /* Animated gradient background */
+        .bg-gradient {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: -1;
-            overflow: hidden;
+            background: radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.15), transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.15), transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(255, 51, 102, 0.1), transparent 50%);
+            animation: gradientShift 15s ease infinite;
         }
 
-        .bg-animation::before,
-        .bg-animation::after {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .bg-animation::before {
-            background: var(--accent-primary);
-            top: -250px;
-            left: -250px;
-            animation-delay: 0s;
-        }
-
-        .bg-animation::after {
-            background: var(--accent-secondary);
-            bottom: -250px;
-            right: -250px;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(100px, -100px) scale(1.1); }
-            66% { transform: translate(-100px, 100px) scale(0.9); }
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
 
         /* Header */
@@ -93,16 +62,22 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(10, 14, 39, 0.8);
+            background: rgba(10, 14, 39, 0.7);
             backdrop-filter: blur(20px);
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
 
-        body.light-mode header {
-            background: rgba(248, 250, 252, 0.9);
+        body.light header {
+            background: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        header.scrolled {
+            padding: 0.8rem 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         nav {
@@ -116,36 +91,35 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-size: 1.5rem;
+            gap: 0.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .logo img {
-            width: 50px;
-            height: 50px;
+        .logo-img {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            border: 2px solid var(--accent-primary);
-            animation: rotate 20s linear infinite;
+            border: 2px solid var(--accent-cyan);
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .logo:hover .logo-img {
+            transform: rotate(360deg);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
             position: relative;
@@ -159,7 +133,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
             transition: width 0.3s ease;
         }
 
@@ -168,54 +142,56 @@
         }
 
         .theme-toggle {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-light);
+            background: transparent;
+            border: 2px solid var(--border-glow);
+            color: var(--text-primary);
             padding: 0.5rem;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.2rem;
         }
 
         .theme-toggle:hover {
-            transform: rotate(180deg);
-            background: var(--accent-primary);
+            transform: scale(1.1);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
         }
 
         .mobile-toggle {
             display: none;
             background: none;
             border: none;
-            color: var(--text-light);
+            color: var(--text-primary);
             font-size: 1.5rem;
             cursor: pointer;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding: 8rem 2rem 4rem;
             position: relative;
         }
 
         .hero-content {
-            max-width: 800px;
-            animation: fadeInUp 1s ease;
+            max-width: 900px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -224,73 +200,71 @@
         }
 
         .profile-img {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            border: 4px solid var(--accent-primary);
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+            border: 3px solid var(--accent-cyan);
+            box-shadow: 0 0 60px var(--border-glow);
             margin: 0 auto 2rem;
             object-fit: cover;
-            animation: pulse 3s infinite;
+            animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 50px rgba(0, 212, 255, 0.3); }
-            50% { box-shadow: 0 0 80px rgba(0, 212, 255, 0.6); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease 0.2s backwards;
+            letter-spacing: -2px;
         }
 
         .subtitle {
             font-size: 1.8rem;
-            color: var(--accent-primary);
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.4s backwards;
+            color: var(--accent-cyan);
+            margin-bottom: 2.5rem;
+            font-weight: 500;
         }
 
         .social-links {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
-            animation: fadeInUp 1s ease 0.6s backwards;
         }
 
-        .social-links a {
-            width: 60px;
-            height: 60px;
+        .social-btn {
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--card-bg);
-            border: 2px solid var(--border-color);
+            border: 2px solid transparent;
             border-radius: 50%;
-            color: var(--text-light);
+            color: var(--text-primary);
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
 
-        .social-links a:hover {
-            transform: translateY(-10px) scale(1.1);
-            background: var(--accent-primary);
-            border-color: var(--accent-primary);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        .social-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+            border-color: transparent;
+            box-shadow: 0 15px 40px var(--border-glow);
         }
 
-        /* Section Styles */
+        /* Sections */
         section {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
         }
 
         h2 {
@@ -298,13 +272,13 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 3rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            letter-spacing: -1px;
         }
 
-        /* About Section */
+        /* About */
         .about-content {
             max-width: 800px;
             margin: 0 auto;
@@ -312,19 +286,19 @@
         }
 
         .about-content p {
-            font-size: 1.3rem;
-            color: var(--text-muted);
+            font-size: 1.25rem;
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.8;
         }
 
         .age-highlight {
-            color: var(--accent-primary);
+            color: var(--accent-cyan);
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
 
-        /* Projects Grid */
+        /* Projects */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -333,28 +307,47 @@
 
         .project-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             text-decoration: none;
-            color: var(--text-light);
+            color: var(--text-primary);
             display: block;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
-            border-color: var(--accent-primary);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 212, 255, 0.25);
         }
 
         .project-img {
             width: 100%;
-            height: 250px;
+            height: 240px;
             object-fit: cover;
-            transition: transform 0.5s ease;
-            position: relative;
+            transition: transform 0.6s ease;
         }
 
         .project-card:hover .project-img {
@@ -367,16 +360,17 @@
 
         .project-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            font-weight: 700;
         }
 
         .project-card p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
-        /* Contact Section */
+        /* Contact */
         .contact-content {
             max-width: 700px;
             margin: 0 auto;
@@ -390,59 +384,71 @@
             margin-bottom: 2rem;
         }
 
-        .contact-links a {
+        .contact-btn {
             width: 70px;
             height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--card-bg);
-            border: 2px solid var(--border-color);
+            border: 2px solid transparent;
             border-radius: 50%;
-            color: var(--text-light);
+            color: var(--text-primary);
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.8rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
 
-        .contact-links a:hover {
+        .contact-btn:hover {
             transform: translateY(-10px) scale(1.1);
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-color: transparent;
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+            box-shadow: 0 20px 50px var(--border-glow);
         }
 
         .contact-content p {
             font-size: 1.2rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             line-height: 1.8;
         }
 
         /* Footer */
         footer {
             background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 2rem;
             text-align: center;
-            color: var(--text-muted);
+            color: var(--text-secondary);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
-                top: 80px;
+                top: 75px;
                 left: -100%;
                 flex-direction: column;
-                background: rgba(10, 14, 39, 0.98);
+                background: rgba(10, 14, 39, 0.95);
                 width: 100%;
                 padding: 2rem;
                 transition: left 0.3s ease;
                 backdrop-filter: blur(20px);
             }
 
-            body.light-mode .nav-links {
-                background: rgba(248, 250, 252, 0.98);
+            body.light .nav-links {
+                background: rgba(255, 255, 255, 0.95);
             }
 
             .nav-links.active {
@@ -454,43 +460,31 @@
             }
 
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
 
             .subtitle {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
 
             h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .projects-grid {
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
+    <div class="bg-gradient"></div>
 
-    <header>
+    <header id="header">
         <nav>
             <div class="logo">
-                <img src="https://i.postimg.cc/Fz2hR18L/pavan-logo.png" alt="Logo">
-                <span>Who am I?</span>
+                <img src="https://i.postimg.cc/Fz2hR18L/pavan-logo.png" alt="Logo" class="logo-img">
+                <span>Pavan Hegde</span>
             </div>
             <div class="nav-links" id="navLinks">
                 <a href="#about">About</a>
@@ -510,25 +504,25 @@
             <h1>Pavan Hegde</h1>
             <p class="subtitle">Web Developer | Tech Innovator</p>
             <div class="social-links">
-                <a href="https://github.com/pavansweb" target="_blank" aria-label="GitHub">
+                <a href="https://github.com/pavansweb" target="_blank" class="social-btn" aria-label="GitHub">
                     <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                 </a>
-                <a href="https://www.instagram.com/pavan._.hegde" target="_blank" aria-label="Instagram">
+                <a href="https://www.instagram.com/pavan._.hegde" target="_blank" class="social-btn" aria-label="Instagram">
                     <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="about" class="fade-in">
+    <section id="about" class="reveal">
         <h2>About Me</h2>
         <div class="about-content">
-            <p>Just an average random guy who loves coding shit. Other things I love include physics and my hobbies are umm basketball and chess mostly?</p>
+            <p>Just an average random guy who loves coding. Other things I love include physics and my hobbies are basketball and chess mostly.</p>
             <p>I am <span class="age-highlight" id="age">15</span> years old.</p>
         </div>
     </section>
 
-    <section id="projects" class="fade-in">
+    <section id="projects" class="reveal">
         <h2>My Projects</h2>
         <div class="projects-grid">
             <a href="https://hmovies.onrender.com/" target="_blank" class="project-card">
@@ -569,17 +563,17 @@
         </div>
     </section>
 
-    <section id="contact" class="fade-in">
+    <section id="contact" class="reveal">
         <h2>Contact Me</h2>
         <div class="contact-content">
             <div class="contact-links">
-                <a href="mailto:pavansh555@gmail.com" aria-label="Email">
+                <a href="mailto:pavansh555@gmail.com" class="contact-btn" aria-label="Email">
                     <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 </a>
-                <a href="https://www.instagram.com/pavan._.hegde" target="_blank" aria-label="Instagram">
+                <a href="https://www.instagram.com/pavan._.hegde" target="_blank" class="contact-btn" aria-label="Instagram">
                     <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </a>
-                <a href="https://github.com/pavansweb" target="_blank" aria-label="GitHub">
+                <a href="https://github.com/pavansweb" target="_blank" class="contact-btn" aria-label="GitHub">
                     <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                 </a>
             </div>
@@ -592,132 +586,76 @@
     </footer>
 
     <script>
-        // Age calculation
-        function calculateAge() {
-            const birthDate = new Date("2009-07-24");
-            const today = new Date();
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
-            const dayDiff = today.getDate() - birthDate.getDate();
-            if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-                age--;
-            }
+        // Age calculator
+        function calcAge() {
+            const birth = new Date("2009-07-24");
+            const now = new Date();
+            let age = now.getFullYear() - birth.getFullYear();
+            const m = now.getMonth() - birth.getMonth();
+            if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
             return age;
         }
-        document.getElementById('age').textContent = calculateAge();
+        document.getElementById('age').textContent = calcAge();
         document.getElementById('year').textContent = new Date().getFullYear();
 
         // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
+        const toggle = document.getElementById('themeToggle');
         const body = document.body;
-        let isDark = true;
+        let dark = true;
 
-        themeToggle.addEventListener('click', () => {
-            isDark = !isDark;
-            body.classList.toggle('light-mode');
-            themeToggle.textContent = isDark ? '☀️' : '🌙';
+        toggle.addEventListener('click', () => {
+            dark = !dark;
+            body.classList.toggle('light');
+            toggle.textContent = dark ? '☀️' : '🌙';
         });
 
-        // Mobile menu toggle
-        const mobileToggle = document.getElementById('mobileToggle');
+        // Mobile menu
+        const mobileBtn = document.getElementById('mobileToggle');
         const navLinks = document.getElementById('navLinks');
 
-        mobileToggle.addEventListener('click', () => {
+        mobileBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            mobileToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            mobileBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
         });
 
-        // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                mobileToggle.textContent = '☰';
+                mobileBtn.textContent = '☰';
             });
         });
 
-        // Smooth scrolling
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
+        // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.classList.add('active');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Parallax effect on scroll
+        // Header scroll effect
+        const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.hero-content');
-            parallaxElements.forEach(el => {
-                el.style.transform = `translateY(${scrolled * 0.5}px)`;
-            });
-        });
-
-        // Add particle effect on mouse move
-        document.addEventListener('mousemove', (e) => {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.width = '4px';
-            particle.style.height = '4px';
-            particle.style.borderRadius = '50%';
-            particle.style.background = 'var(--accent-primary)';
-            particle.style.left = e.clientX + 'px';
-            particle.style.top = e.clientY + 'px';
-            particle.style.pointerEvents = 'none';
-            particle.style.opacity = '0.5';
-            particle.style.transition = 'all 1s ease';
-            particle.style.zIndex = '9999';
-            
-            document.body.appendChild(particle);
-            
-            setTimeout(() => {
-                particle.style.opacity = '0';
-                particle.style.transform = 'scale(3)';
-            }, 10);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 1000);
-        });
-
-        // Typing effect for subtitle
-        const subtitle = document.querySelector('.subtitle');
-        const text = subtitle.textContent;
-        subtitle.textContent = '';
-        let i = 0;
-
-        function typeWriter() {
-            if (i < text.length) {
-                subtitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-        }
-
-        setTimeout(typeWriter, 1000);
+        });
     </script>
 </body>
 </html>
