@@ -63,6 +63,13 @@ const PROJECTS = [
     link: "https://bucket-list-rho.vercel.app/",
     tags: ["Productivity", "React", "Goals"],
   },
+  {
+    name: "Storista",
+    description: "Store your files quickly and access them easily whenever you need them!",
+    image: "https://i.postimg.cc/NGVb0qsB/storista.png",
+    link: "https://storista.vercel.app",
+    tags: ["Productivity", "React", "Goals"],
+  },
 ];
 
 const FloatingParticles = ({ theme }) => {
